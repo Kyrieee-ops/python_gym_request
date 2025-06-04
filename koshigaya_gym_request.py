@@ -96,7 +96,6 @@ def user_requests(browser):
         page_height = browser.execute_script("return document.body.scrollHeight")
         print(f"ページ全体の高さ: {page_height}px")
         # スクリーンショットを保存
-        browser.save_screenshot("koshigaya_sports_center.png") 
 
         browser.execute_script("window.scrollTo(0, 700)")
 
@@ -113,6 +112,7 @@ def user_requests(browser):
         complete_button = browser.find_element(By.XPATH, '//*[@id="js-main"]/div[4]/div[2]/input')
         complete_button.click()
         print("申請リンクボタンをクリックしました")
+        browser.save_screenshot("koshigaya_sports_center.png") 
 
         return True
     except Exception as e:
@@ -121,13 +121,30 @@ def user_requests(browser):
     finally:
         pass
 
+# def gmail_open(browser):
+#     try:
+#         # GmailのURLを開く
+#         gmail_url = "https://mail.google.com/"
+#         browser.get(gmail_url)
+#         print("Gmailを開きました")
+
+
+
+#         # ここでは、Gmailのページが正しく開かれたことを確認するための簡単なチェックを行う
+#         WebDriverWait(browser, 10).until(
+#             EC.title_contains("Gmail")
+#         )
+#         print("Gmailのページが正しく開かれました")
+        
+#     except Exception as e:
+#         print(f"Gmail処理でエラーが発生しました: {e}")
+
 # メイン処理フロー
 def main():
-    browser = init_browser()
-    # 体育館貸出抽選の画面に遷移
+    browser = init_browser()  # ブラウザの初期化処理
     user_requests(browser)  # 利用申請処理
     browser.quit()  # 必ずブラウザを閉じる
-
+    # gmail_open(browser)  # Gmailを開く処理
 
 # main関数を呼び出す
 if __name__ == "__main__":
